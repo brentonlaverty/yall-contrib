@@ -1,28 +1,31 @@
-<%= link_to '< back', root_path %>
 <div class="row hero">
-	<div class="col-md-8">
-		<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
-		<h1><%= @prompt.headline %></h1>
-		<% if current_user != nil && current_user.is_admin? %>
-			<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" }, :class => 'btn btn-danger'%>
-			<% end %>
-		<p><%= content_tag :p, "by #{@prompt.user.username.capitalize } #{time_ago_in_words(@prompt.created_at)} ago " %></p>
-		<p><%= @prompt.body %></p>
-	</div>
-	<div class="col-md-4">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<% if current_user != nil %>
-					<h3>Contribute to this story!</h3>
-				  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get, :class => 'btn btn-primary' %> 	
-					<% if current_user.is_admin? %>
-				  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get, :class => 'btn btn-info' %>	
-				  	<% end %>
-				<% end %>	
+	<div class="container">
+		<div class="col-md-8">
+			<%= link_to '< back', root_path %>
+			<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
+			<h1><%= @prompt.headline %></h1>
+			<% if current_user != nil && current_user.is_admin? %>
+				<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" }, :class => 'btn btn-danger'%>
+				<% end %>
+			<p><%= content_tag :p, "by #{@prompt.user.username.capitalize } #{time_ago_in_words(@prompt.created_at)} ago " %></p>
+			<p><%= @prompt.body %></p>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+	  			<div class="panel-body">
+					<% if current_user != nil %>
+						<h3>Contribute to this story!</h3>
+					  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get, :class => 'btn btn-primary' %> 	
+						<% if current_user.is_admin? %>
+					  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get, :class => 'btn btn-info' %>	
+					  	<% end %>
+					<% end %>	
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<main role="main" class="container">
 <div class="row">
 	<div class="col-md-8">
 		<%if current_user != nil && current_user.is_admin? %>
@@ -49,3 +52,4 @@
 	<% if current_user == nil %>
 		<p>Want to contribute to this story? <%=  link_to 'Sign In', '/users/sign_in' %> or <%=  link_to 'Sign Up', '/users/sign_up' %>		
 	<% end %>
+</main>

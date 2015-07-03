@@ -59,13 +59,10 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 	</header>
-	<main role="main" class="container">
 		<% if flash[:notice] %><p id="notice"><%= notice %></p><% end %>
 		<% if flash[:alert] %><p id="alert"><%= alert %></p><% end %>
 
 		<%= yield %>
-	</main>
-
 </body>
 </html>
 

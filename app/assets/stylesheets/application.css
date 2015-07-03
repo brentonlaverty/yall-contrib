@@ -30,7 +30,8 @@ p {
 }
 
 .row.hero {
-	background-image: url('http://voxholder.herokuapp.com/400/250');
+	background-image: url('http://voxholder.herokuapp.com/1200/400');
+	background-position: center;
 	background-size: cover;
 	padding:3em;
 }

@@ -1,12 +1,14 @@
-<% if current_user != nil %>
-	<% if current_user.is_admin? %>
-		<p>YOU ARE AN ADMINISTRATOR</p>
-	<% else %>
-		<p>NOT AN ADMIN</p>
+<main role="main" class="container">
+	<% if current_user != nil %>
+		<% if current_user.is_admin? %>
+			<p>YOU ARE AN ADMINISTRATOR</p>
+		<% else %>
+			<p>NOT AN ADMIN</p>
+		<% end %>
 	<% end %>
-<% end %>
-<div class="row">
-	<div class="col-md-12">
-		<%= render @prompts %>
+	<div class="row">
+		<div class="col-md-12">
+			<%= render @prompts %>
+		</div>
 	</div>
-</div>
+</main>

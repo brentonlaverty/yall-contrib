@@ -1,43 +1,46 @@
 <%= link_to '< back', root_path %>
-<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
-<h1><%= @prompt.headline %></h1>
-<% if current_user != nil && current_user.is_admin? %>
-	<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" } %>
+<div class="row">
+	<div class="col-md-8">
+		<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
+		<h1><%= @prompt.headline %></h1>
+		<% if current_user != nil && current_user.is_admin? %>
+			<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" } %>
+			<% end %>
+		<p><%= content_tag :p, "by #{@prompt.user.username.capitalize } #{time_ago_in_words(@prompt.created_at)} ago " %></p>
+		<p><%= @prompt.body %></p>
+	</div>
+	<div class="col-md-4">
+		<% if current_user != nil %>
+					<h3>Contribute to this story!</h3>
+				  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get %> 	
+					<% if current_user.is_admin? %>
+				  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get %>	
+				  	<% end %>
+				<% end %>	
+	</div>
+</div>
+<div class="row">
+			<%if current_user != nil && current_user.is_admin? %>
+				<% if current_user.is_admin? %>
+					<h4><%= @contribs.count %> Total Contribs | <%= @published_contribs.count %> Published Contribs  |  <%= @unpublished_contribs.count%> Awaiting Approval</h4>
+					<hr>
+				<% end %>
+			<% end %>
+
+			<% if @published_contribs.length != 0 %>
+				<% @published_contribs.each do |contrib| %>
+					<div class="col-md-4">
+						<p><em>Reader <b><%=contrib.user.username.capitalize %></b> says... </em><p>
+						<h4><%= contrib.headline %></h4>
+						<p><%= contrib.body %></p>
+					</div>
+				<% end %>
+			<% else %>
+				<p>No user contributions yet!</p>
+				<hr>
+			<% end %>
+	</div>
+</div>
+	<% if current_user == nil %>
+		<p>Want to contribute to this story? <%=  link_to 'Sign In', '/users/sign_in' %> or <%=  link_to 'Sign Up', '/users/sign_up' %>		
 	<% end %>
-<p><%= content_tag :p, "by #{@prompt.user.username.capitalize } #{time_ago_in_words(@prompt.created_at)} ago " %></p>
-<p><%= @prompt.body %></p>
-<br>
-
-<% if current_user != nil %>
-	<h3>Contribute to this story!</h3>
-  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get %> 	
-	<% if current_user.is_admin? %>
-  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get %>	
-  	<% end %>
-<% end %>	
-
-<hr>
-
-<%if current_user != nil && current_user.is_admin? %>
-	<% if current_user.is_admin? %>
-		<h4><%= @contribs.count %> Total Contribs | <%= @published_contribs.count %> Published Contribs  |  <%= @unpublished_contribs.count%> Awaiting Approval</h4>
-		<hr>
-	<% end %>
-<% end %>
-
-<% if @published_contribs.length != 0 %>
-	<% @published_contribs.each do |contrib| %>
-		<p><em>Reader <b><%=contrib.user.username.capitalize %></b> says... </em><p>
-		<h4><%= contrib.headline %></h4>
-		<p><%= contrib.body %></p>
-		<hr>
-	<% end %>
-<% else %>
-	<p>No user contributions yet!</p>
-	<hr>
-<% end %>
-
-<% if current_user == nil %>
-	<p>Want to contribute to this story? <%=  link_to 'Sign In', '/users/sign_in' %> or <%=  link_to 'Sign Up', '/users/sign_up' %>		
-<% end %>
-

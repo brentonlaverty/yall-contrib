@@ -1,0 +1,10 @@
+<h1></h1>
+<% if current_user != nil %>
+	<% if current_user.is_admin? %>
+		<p>YOU ARE AN ADMINISTRATOR</p>
+	<% else %>
+		<p></p>
+	<% end %>
+<% end %>
+<%= render @prompts %>
+

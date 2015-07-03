@@ -1,0 +1,20 @@
+<% if current_user != nil && current_user.is_admin? %>
+
+	<h1><%= @prompt.headline %></h1>
+	<% if current_user != nil %>
+		<% if current_user.is_admin? %>
+			<h4><%= @contribs.count %> Total Contribs | <%= @published_contribs.count %> Published Contribs  |  <%= @unpublished_contribs.count%> Awaiting Approval</h4>
+			<hr>
+		<% else %>
+			<p>NOT AN ADMIN</p>
+		<% end %>
+	<% end %>
+	<%= render @contribs %>
+
+<% else %>
+
+  <script type="text/javascript">
+    window.location.href="/"
+  </script>
+
+<% end %>

@@ -1,0 +1,6 @@
+<%= link_to '< back', root_path %>
+<h1><%= @contrib.headline %></h1>
+<p><%= content_tag :p, "submitted by #{@contrib.user.username.capitalize } #{time_ago_in_words(@contrib.created_at)} ago " %></p>
+<p><%= @contrib.body %></p>
+<hr>
+

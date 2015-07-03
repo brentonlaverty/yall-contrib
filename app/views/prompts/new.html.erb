@@ -1,0 +1,29 @@
+<% if current_user != nil %>
+	<% if current_user.is_admin? %>
+		<%= form_for @prompt do |f| %>
+
+			<% if @prompt.errors.any? %>
+				<% @prompt.errors.full_messages.each do |msg| %>
+					<p><%= msg %></p>
+				<% end %>
+			<% end %>
+			<h1>Publish New Article</h1>
+			<h3>Article Headline<h3>
+			<p><%= f.text_area :headline %></p>
+			<h3>Article Body<h3>
+			<p><%= f.text_area :body %></p>
+			<h3>Image URL<h3>	
+			<p><%= f.text_area :image_url %></p>
+		    <p><%= check_box_tag 'Allow user contributions' %> Allow user contributions</p>
+			<p>
+				<%= f.submit "Publish Article" %>
+			</p>
+
+		<% end %>
+	<% else %>
+		<h1>Sorry, you're not an editor!</h1>
+	<% end %>
+<% end %>
+
+
+

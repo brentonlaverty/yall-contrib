@@ -1,0 +1,18 @@
+<h1><%= @prompt.headline %></h1>
+<%= form_for [@prompt, @contrib] do |f| %>
+
+	<% if @contrib.errors.any? %>
+		<% @contrib.errors.full_messages.each do |msg| %>
+			<p><%= msg %></p>
+		<% end %>
+	<% end %>
+
+	<h3>Article Headline<h3>
+	<p><%= f.text_area :headline %></p>
+	<h3>Article Body<h3>
+	<p><%= f.text_area :body %></p>
+	<h3>Image URL<h3>	
+	<p><%= f.text_area :image_url %></p>
+	<p><%= f.submit "Contributed!" %></p>
+
+<% end %>

@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,700);
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Roboto', sans-serif;
+}

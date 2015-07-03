@@ -45,3 +45,5 @@ end
 
 gem 'devise'
 
+gem 'bootstrap-sass'
+gem 'sass-rails'

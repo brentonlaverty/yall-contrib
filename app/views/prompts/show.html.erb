@@ -4,7 +4,7 @@
 		<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
 		<h1><%= @prompt.headline %></h1>
 		<% if current_user != nil && current_user.is_admin? %>
-			<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" } %>
+			<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => @prompt.id }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{@prompt.headline}\"?" }, :class => 'btn btn-danger'%>
 			<% end %>
 		<p><%= content_tag :p, "by #{@prompt.user.username.capitalize } #{time_ago_in_words(@prompt.created_at)} ago " %></p>
 		<p><%= @prompt.body %></p>
@@ -12,9 +12,9 @@
 	<div class="col-md-4">
 		<% if current_user != nil %>
 					<h3>Contribute to this story!</h3>
-				  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get %> 	
+				  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get, :class => 'btn btn-primary' %> 	
 					<% if current_user.is_admin? %>
-				  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get %>	
+				  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get, :class => 'btn btn-info' %>	
 				  	<% end %>
 				<% end %>	
 	</div>

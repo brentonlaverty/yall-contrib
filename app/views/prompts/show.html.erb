@@ -10,23 +10,28 @@
 		<p><%= @prompt.body %></p>
 	</div>
 	<div class="col-md-4">
-		<% if current_user != nil %>
+		<div class="panel panel-default">
+  			<div class="panel-body">
+				<% if current_user != nil %>
 					<h3>Contribute to this story!</h3>
 				  	<%= button_to 'Contribute to story', new_prompt_contrib_path(@prompt), method: :get, :class => 'btn btn-primary' %> 	
 					<% if current_user.is_admin? %>
 				  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get, :class => 'btn btn-info' %>	
 				  	<% end %>
 				<% end %>	
+			</div>
+		</div>
 	</div>
 </div>
 <div class="row">
-			<%if current_user != nil && current_user.is_admin? %>
-				<% if current_user.is_admin? %>
-					<h4><%= @contribs.count %> Total Contribs | <%= @published_contribs.count %> Published Contribs  |  <%= @unpublished_contribs.count%> Awaiting Approval</h4>
-					<hr>
-				<% end %>
+	<div class="col-md-8">
+		<%if current_user != nil && current_user.is_admin? %>
+			<% if current_user.is_admin? %>
+				<p>Total contribs  <span class="badge"><%= @contribs.count %></span> | Published contribs <span class="badge"> <%= @published_contribs.count %></span> | Awaiting approval <span class="badge"> <%= @unpublished_contribs.count%></span></p>
+				<hr>
 			<% end %>
-
+		<% end %>
+	</div>	
 			<% if @published_contribs.length != 0 %>
 				<% @published_contribs.each do |contrib| %>
 					<div class="col-md-4">

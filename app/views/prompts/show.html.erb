@@ -1,5 +1,5 @@
 <%= link_to '< back', root_path %>
-<div class="row">
+<div class="row hero">
 	<div class="col-md-8">
 		<div style="width:600; overflow:hidden"><%= image_tag @prompt.image_url %></div>	
 		<h1><%= @prompt.headline %></h1>
@@ -29,7 +29,7 @@
 			<% if current_user.is_admin? %>
 				<p>Total contribs  <span class="badge"><%= @contribs.count %></span> | Published contribs <span class="badge"> <%= @published_contribs.count %></span> | Awaiting approval <span class="badge"> <%= @unpublished_contribs.count%></span></p>
 				<hr>
-			<% end %>
+				<% end %>
 		<% end %>
 	</div>	
 			<% if @published_contribs.length != 0 %>

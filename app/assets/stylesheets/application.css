@@ -28,3 +28,9 @@ a{
 p {
 	font-family: 'Roboto', sans-serif;
 }
+
+.row.hero {
+	background-image: url('http://voxholder.herokuapp.com/400/250');
+	background-size: cover;
+	padding:3em;
+}

@@ -20,6 +20,10 @@
 						  		<%= button_to 'Moderate Reader Contributions', prompt_contribs_path(@prompt), method: :get, :class => 'btn btn-info' %>	
 						  	<% end %>
 						<% end %>	
+						<% if current_user == nil %>
+							<h3>Want to contribute to this story?</h3>
+							<h4> <%=  link_to 'Sign Up', '/users/sign_up', :class => 'btn btn-primary' %> or <%=  link_to 'Sign In', '/users/sign_in' , :class=> 'btn btn-default'%>	</h4>
+						<% end %>
 					</div>
 				</div>
 			</div>	
@@ -37,12 +41,14 @@
 					<% end %>
 			<% end %>
 		</div>	
+	</div>
+	<div class="row">
 		<% if @published_contribs.length != 0 %>
 			<% @published_contribs.each do |contrib| %>
 				<div class="col-md-4">
-					<p><em>Reader <b><%=contrib.user.username.capitalize %></b> says... </em><p>
-					<h4><%= contrib.headline %></h4>
+					<h3><%= contrib.headline %></h3>
 					<p><%= contrib.body %></p>
+					<p>— Contributed by <b><%=contrib.user.username.capitalize %></b><p>
 				</div>
 			<% end %>
 		<% else %>
@@ -50,7 +56,4 @@
 			<hr>
 		<% end %>
 	</div>
-		<% if current_user == nil %>
-			<p>Want to contribute to this story? <%=  link_to 'Sign In', '/users/sign_in' %> or <%=  link_to 'Sign Up', '/users/sign_up' %>		
-		<% end %>
 </main>

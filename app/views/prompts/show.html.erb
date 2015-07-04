@@ -32,28 +32,31 @@
 </div>
 <main role="main" class="container">
 	<div class="row">
-		<div class="col-md-8">
-			<p><%= @prompt.body %></p>
+		<div class="col-md-10 lead">
+			<p><%= @prompt.body %></p><hr>
 			<%if current_user != nil && current_user.is_admin? %>
 				<% if current_user.is_admin? %>
 					<p>Total contribs  <span class="badge"><%= @contribs.count %></span> | Published contribs <span class="badge"> <%= @published_contribs.count %></span> | Awaiting approval <span class="badge"> <%= @unpublished_contribs.count%></span></p>
-					<hr>
 					<% end %>
 			<% end %>
 		</div>	
 	</div>
-	<div class="row">
-		<% if @published_contribs.length != 0 %>
-			<% @published_contribs.each do |contrib| %>
-				<div class="col-md-4">
-					<h3><%= contrib.headline %></h3>
-					<p><%= contrib.body %></p>
-					<p>— Contributed by <b><%=contrib.user.username.capitalize %></b><p>
-				</div>
-			<% end %>
-		<% else %>
-			<p>No user contributions yet!</p>
-			<hr>
+	<% if @published_contribs.length != 0 %>
+		<% @published_contribs.each do |contrib| %>
+		<div class="row">
+			<div class="col-md-4">
+				<%= image_tag "placeholder2.png", :width => '100%', :alt => 'Roadmap' %>
+			</div>	
+			<div class="col-md-8">
+				<h4><strong><%= contrib.headline %></strong></h4>
+				<p><%= contrib.body %></p>
+				<p>— Contributed by <b><%=contrib.user.username.capitalize %></b><p>
+			</div>
+		</div>	
+		<hr>
 		<% end %>
-	</div>
+	<% else %>
+		<p>No user contributions yet!</p>
+		<hr>
+	<% end %>
 </main>

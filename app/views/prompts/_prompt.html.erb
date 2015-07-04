@@ -5,13 +5,13 @@
 	      <%= image_tag "placeholder2.png", :width => '100%', :alt => 'Roadmap' %>		
 	      <div class="caption">
 	        <h3><%= link_to prompt.headline, prompt %></h3>
-	        <p><p>posted <%= time_ago_in_words(prompt.created_at) %> ago by <%=prompt.user.username.capitalize %> | <a href="#">Contributions <span class="badge"><%= prompt.contribs.where(is_published: true).count %></span></a></p></p>
+	        <p><small>posted <%= time_ago_in_words(prompt.created_at) %> ago by <%=prompt.user.username.capitalize %> | <a href="#">Contributions <span class="badge"><%= prompt.contribs.where(is_published: true).count %></span></a></small></p>
 	        <p><%= prompt.body.gsub(/^(.{200,}?).*$/m,'\1...') %></p>
         	<% if current_user != nil %>
         		<% if current_user.is_admin? %>
         			<%= button_to "Unpublish Article", {:controller => :prompts, :action => 'destroy', :id => prompt.id, }, :method => :delete, data: { confirm: "Are you sure you want to unpublish \"#{prompt.headline}\"?" }, :class => 'btn btn-danger' %> 			
               	<% else %>
-              		<%# button_to 'Contribute to story', new_contrib_path, method: :get %> 	
+              	<%# button_to 'Contribute to story', new_contrib_path, method: :get %> 	
               	<% end %>
         	<% end %>
 	      </div>

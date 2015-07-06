@@ -54,14 +54,20 @@ p {
 
 .approved h4, .moderation h4{
 	text-transform: uppercase;
+	display:inline-block;
+	font-weight:bold;
+	font-size:1em;
 }
 .approved {
 	background-color: $green;
 	h4 {
-		color: darken($green, 20%);
+		color: darken($green, 60%);
 	}
 }
 
 .moderation {
 	background-color: $yellow;
+	h4 {
+		color: darken($yellow, 60%);
+	}
 }

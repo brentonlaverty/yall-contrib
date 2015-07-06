@@ -20,7 +20,8 @@
 
 <% if contrib.is_published? %>
 	<div class="contrib col-md-12 panel approved">
-		<strong>Approved</strong>
+		<h4>Approved   <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+</h4>
 		<h2><%= link_to contrib.headline, contrib %></h2>
 		<%= content_tag :p, "submitted by #{contrib.user.username.capitalize } #{time_ago_in_words(contrib.created_at)} ago " %>
 		<%= content_tag :p, contrib.body %>
@@ -38,7 +39,7 @@
 	</div>
 <% else %>
 	<div class="contrib col-md-12 panel moderation">
-		<strong>Awaiting moderation</strong>
+		<h4>Awaiting moderation <span class="glyphicon glyphicon-record" aria-hidden="true"></h4>
 		<h2><%= link_to contrib.headline, contrib %></h2>
 		<%= content_tag :p, "submitted by #{contrib.user.username.capitalize } #{time_ago_in_words(contrib.created_at)} ago " %>
 		<%= content_tag :p, contrib.body %>

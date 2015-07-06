@@ -19,35 +19,37 @@
  -->
 
 <% if contrib.is_published? %>
-	<div class="contrib" style="background-color:#e0ffc9">
+	<div class="contrib col-md-12 panel approved">
+		<strong>Approved</strong>
 		<h2><%= link_to contrib.headline, contrib %></h2>
 		<%= content_tag :p, "submitted by #{contrib.user.username.capitalize } #{time_ago_in_words(contrib.created_at)} ago " %>
 		<%= content_tag :p, contrib.body %>
 		<hr>	
 		<% if current_user != nil && current_user.is_admin? %>
 			<% if current_user.is_admin? %>
-				<%= button_to "Delete Contrib", {:controller => :contribs, :action => 'destroy', :id => contrib.id }, :method => :delete, data: { confirm: "Are you sure you want to delete Contrib \"#{contrib.headline}\" by #{contrib.user.username.capitalize}?" }%> 
+				<%= button_to "Delete Contrib", {:controller => :contribs, :action => 'destroy', :id => contrib.id }, :method => :delete, data: { confirm: "Are you sure you want to delete Contrib \"#{contrib.headline}\" by #{contrib.user.username.capitalize}?" }, :class => 'btn btn-danger' %> 
 				<% if contrib.is_published? %>
-					<%= button_to "Unpublish", {:controller => :contribs, :action => 'unpublish_contrib', :id => contrib.id }, method: :patch %>
+					<%= button_to "Unpublish", {:controller => :contribs, :action => 'unpublish_contrib', :id => contrib.id }, method: :patch, :class => 'btn btn-default'  %>
 				<% else %>	
-					<%= button_to "Publish", {:controller => :contribs, :action => 'publish_contrib', :id => contrib.id }, method: :patch %>
+					<%= button_to "Publish", {:controller => :contribs, :action => 'publish_contrib', :id => contrib.id }, method: :patch, :class => 'btn btn-primary'  %>
 				<% end %>				
 	      	<% end %>	
 		<% end %>	
 	</div>
 <% else %>
-	<div class="contrib" style="background-color:#fff0ba">
+	<div class="contrib col-md-12 panel moderation">
+		<strong>Awaiting moderation</strong>
 		<h2><%= link_to contrib.headline, contrib %></h2>
 		<%= content_tag :p, "submitted by #{contrib.user.username.capitalize } #{time_ago_in_words(contrib.created_at)} ago " %>
 		<%= content_tag :p, contrib.body %>
 		<hr>	
 		<% if current_user != nil %>
 			<% if current_user.is_admin? %>
-				<%= button_to "Delete Contrib", {:controller => :contribs, :action => 'destroy', :id => contrib.id }, :method => :delete, data: { confirm: "Are you sure you want to delete Contrib \"#{contrib.headline}\" by #{contrib.user.username.capitalize}?" }%> 
+				<%= button_to "Delete Contrib", {:controller => :contribs, :action => 'destroy', :id => contrib.id }, :method => :delete, data: { confirm: "Are you sure you want to delete Contrib \"#{contrib.headline}\" by #{contrib.user.username.capitalize}?" }, :class => 'btn btn-danger' %> 
 				<% if contrib.is_published? %>
-					<%= button_to "Unpublish", {:controller => :contribs, :action => 'unpublish_contrib', :id => contrib.id }, method: :patch %>
+					<%= button_to "Unpublish", {:controller => :contribs, :action => 'unpublish_contrib', :id => contrib.id }, method: :patch , :class => 'btn btn-default' %>
 				<% else %>	
-					<%= button_to "Publish", {:controller => :contribs, :action => 'publish_contrib', :id => contrib.id }, method: :patch %>
+					<%= button_to "Publish", {:controller => :contribs, :action => 'publish_contrib', :id => contrib.id }, method: :patch, :class => 'btn btn-primary	'  %>
 				<% end %>				
 	      	<% end %>	
 		<% end %>	

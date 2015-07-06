@@ -1,20 +1,28 @@
-<% if current_user != nil && current_user.is_admin? %>
-
-	<h1><%= @prompt.headline %></h1>
-	<% if current_user != nil %>
-		<% if current_user.is_admin? %>
-			<h4><%= @contribs.count %> Total Contribs | <%= @published_contribs.count %> Published Contribs  |  <%= @unpublished_contribs.count%> Awaiting Approval</h4>
-			<hr>
+<div class="row hero jumbotron">
+	<div class="gradient">
+		<div class="container">
+			<div class="col-md-10">
+				<h4>Moderate contributions to:</h4>	
+				<h1><%= @prompt.headline %></h1>
+				<% if current_user != nil %>
+					<% if current_user.is_admin? %>
+						<h5>Total Contribs <span class="badge"><%= @contribs.count %></span> | Published Contribs <span class="badge"><%= @published_contribs.count %></span>  | Awaiting Approval <span class="badge"> <%= @unpublished_contribs.count%> </span></h5>
+					<% else %>
+						<p>NOT AN ADMIN</p>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<main class="container">
+	<div class="row">
+		<% if current_user != nil && current_user.is_admin? %>
+			<%= render @contribs %>
 		<% else %>
-			<p>NOT AN ADMIN</p>
-		<% end %>
+		  <script type="text/javascript">
+		    window.location.href="/"
+		  </script>
 	<% end %>
-	<%= render @contribs %>
-
-<% else %>
-
-  <script type="text/javascript">
-    window.location.href="/"
-  </script>
-
-<% end %>
+	</div>
+</main>
